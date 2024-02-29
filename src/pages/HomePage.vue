@@ -1,9 +1,19 @@
-<template></template>
+<template>
+  <div class="container">
+    <section class="row">
+      <div class="col-12 m-3 p-2 border rounded-3">
+        <p>{{ blogs }}</p>
+      </div>
+    </section>
+  </div>
+</template>
 
 <script>
-import { onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
 import { logger } from '../utils/Logger.js';
 import { blogsService } from '../services/BlogsService.js'
+import { AppState } from "../AppState.js"
+
 
 export default {
   setup() {
@@ -23,7 +33,7 @@ export default {
 
 
     return {
-
+      blogs: computed(() => AppState.blogs)
     }
   }
 }
