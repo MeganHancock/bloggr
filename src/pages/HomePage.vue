@@ -1,8 +1,12 @@
 <template>
   <div class="container">
     <section class="row">
-      <div class="col-12 m-3 p-2 border rounded-3">
-        <p>{{ blogs }}</p>
+      <div v-for="blog in blogs" :key="blog.id" class="col-12 m-3 p-2 border rounded-3 d-flex justify-content-between">
+        <div class="blog-text">
+          <p>{{ blog.title }}</p>
+
+        </div>
+        <img :src="blog.imgUrl" :alt="blog.title" class="blog-image rounded-3">
       </div>
     </section>
   </div>
@@ -39,4 +43,10 @@ export default {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.blog-image {
+  height: 13vh;
+  width: 20vh;
+  object-fit: cover;
+}
+</style>
