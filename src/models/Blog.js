@@ -3,7 +3,9 @@ export class Blog {
         this.id = data.id || data._id
         this.title = data.title
         this.body = data.body
+        // this.bodyPreview = data.body 
         this.imgUrl = data.imgUrl
+        this.createdAt = new Date(data.createdAt).toLocaleDateString()
         this.creatorId = data.creatorId
         this.creator = data.creator
 
