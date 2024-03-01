@@ -15,9 +15,10 @@ class BlogsService {
 
     async getBlogsByCreatorId(profileId) {
         const response = await api.get(`api/blogs?creatorId=${profileId}`)
-        logger.log('blogs found?', response.data)
+        // logger.log('blogs found?', response.data)
         const foundBlogs = response.data.map(blogPOJO => new Blog(blogPOJO))
-        logger.log('mapped', foundBlogs)
+        // logger.log('mapped', foundBlogs)
+        AppState.blogs = foundBlogs
     }
 
 }
