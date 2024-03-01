@@ -12,11 +12,18 @@
             </div>
 
             <!-- TODO modal -->
-            <p role="button" @click="console.log('is this a modal')" title="View Full Blog" data-bs-toggle="modal"
-                data-bs-target="#blogModal" class="fw-bold">{{ blog.title }}
+            <p @click="setActiveBlog()" role="button" title="View Full Blog" data-bs-toggle="modal"
+                data-bs-target="#blogModal" class="fw-bold">
+                {{ blog.title }}
             </p>
 
             <p class="body-preview me-1">{{ blog.body }}</p>
+            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="blogModal" data-bs-target="#blogModal">
+                read more...
+            </button> -->
+
+
+
             <p>{{ blog.createdAt }}</p>
         </div>
         <img :src="blog.imgUrl" :alt="blog.title" class="blog-image rounded-3 ">
@@ -26,14 +33,22 @@
 
 <script>
 import { Blog } from '../models/Blog.js';
+import { blogsService } from '../services/BlogsService.js';
+import { logger } from '../utils/Logger.js';
 
 
 export default {
     props: {
         blog: { type: Blog, required: true }
     },
-    setup() {
-        return {}
+    setup(props) {
+        return {
+            setActiveBlog() {
+                logger.log(props.blog)
+                blogsService.setActiveBlog(props.blog)
+            }
+
+        }
     }
 }
 </script>

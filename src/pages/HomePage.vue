@@ -6,6 +6,7 @@
       </div>
     </section>
   </div>
+  <FullBlogModal />
 </template>
 
 <script>
@@ -35,7 +36,7 @@ export default {
       blogs: computed(() => AppState.blogs)
     };
   },
-  components: { BlogCard }
+  components: { BlogCard, FullBlogModal }
 }
 </script>
 
