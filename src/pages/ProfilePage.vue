@@ -10,6 +10,13 @@
                 </div>
             </div>
         </section>
+
+        <section class="row">
+            <div v-for="blog in blogs" :key="blog.id">
+                <BlogCard :blog="blog" />
+            </div>
+        </section>
+
     </div>
 </template>
 
@@ -21,33 +28,43 @@ import Pop from '../utils/Pop.js';
 import { logger } from '../utils/Logger.js';
 import { useRoute } from 'vue-router';
 import { profilesService } from '../services/ProfilesService.js'
+import BlogCard from '../components/BlogCard.vue';
+import { blogsService } from '../services/BlogsService.js';
 
 export default {
     setup() {
-        const route = useRoute()
+        const route = useRoute();
 
         async function getProfileById() {
             try {
-                const profileId = route.params.profileId
+                const profileId = route.params.profileId;
                 // logger.log(profileId)
-                await profilesService.getProfileById(profileId)
+                await profilesService.getProfileById(profileId);
+            }
+            catch (error) {
+                Pop.error(error);
+            }
+        }
 
+        async function getBlogsByCreatorId() {
+            try {
+                const profileId = route.params.profileId
+                await blogsService.getBlogsByCreatorId(profileId)
             } catch (error) {
                 Pop.error(error)
-
             }
         }
 
         onMounted(() => {
-            getProfileById()
-
-        })
-
+            getProfileById();
+            getBlogsByCreatorId();
+        });
         return {
             blogs: computed(() => AppState.blog),
             profile: computed(() => AppState.activeProfile)
-        }
-    }
+        };
+    },
+    components: { BlogCard }
 }
 </script>
 
